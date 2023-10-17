@@ -1,0 +1,14 @@
+n=6;
+p=0.5;
+lambda=3;
+
+x=0:1:20;
+pdf1=binopdf(x,n,p);
+pdf2=poisspdf(x, lambda);
+
+plot(x, pdf1, Marker="o", Color="red", LineStyle="none")
+hold on
+plot(x, pdf2, Marker="x", Color="blue", LineStyle="none")
+
+eBino=n*p
+varBino=n*p*(1-p)
