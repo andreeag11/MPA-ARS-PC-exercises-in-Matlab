@@ -1,0 +1,32 @@
+mu=10;
+sigma=sqrt(5);
+
+n=20;
+p=0.5;
+
+x1=0:0.01:20;
+pdf1=normpdf(x1, mu, sigma);
+cdf1=normcdf(x1, mu, sigma);
+
+x2=0:1:20;
+pdf2=binopdf(x2,n,p);
+cdf2=binocdf(x2,n,p);
+
+subplot(3,1,2)
+plot(x1,pdf1, Color="blue")
+hold on
+stem(x2, pdf2, Color="red")
+
+subplot(3,1,1)
+plot(x1,cdf1, Color="blue")
+hold on
+plot(x2, cdf2, Color="red")
+
+simul_bino=binornd(n,p,[1 10*n]);
+subplot(3, 1, 3)
+histfit(simul_bino)
+
+eBino=n*p
+mean(simul_bino)
+varBino=n*p*(1-p)
+var(simul_bino)
