@@ -1,0 +1,30 @@
+N=150;
+p=1/5;
+xbino=0:1:50;
+
+mu=30; sigma=sqrt(24);
+xnorm=0:0.1:50;
+
+lambda=30;
+xpois=0:1:50;
+
+pdf1=binopdf(xbino, N, p);
+pdf2=normpdf(xnorm, mu, sigma);
+pdf3=poisspdf(xpois, lambda);
+
+cdf1=binocdf(xbino, N, p);
+cdf2=normcdf(xnorm, mu, sigma);
+cdf3=poisscdf(xpois, lambda);
+
+subplot(2, 1, 1)
+plot(xbino, pdf1, Color="red", Marker="o", LineStyle="none")
+hold on
+plot(xnorm, pdf2, Color="black")
+plot(xpois, pdf3, Color="blue", Marker="x", LineStyle="none")
+
+subplot(2, 1, 2)
+plot(xbino, cdf1, Color="red", Marker="o", LineStyle="none")
+hold on
+plot(xnorm, cdf2, Color="black")
+plot(xpois, cdf3, Color="blue", Marker="x", LineStyle="none")
+
