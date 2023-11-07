@@ -1,0 +1,44 @@
+fc=1e3;
+fs=50e3;
+Ts=1/fs;
+T=2*pi/fc;
+t=0:Ts:100*T;
+phase=0;
+
+yt=cos(2*pi*fc*t+phase);
+sigma=2;
+nt=sigma*randn(1, length(t));
+xt=yt+nt;
+
+h = zoom;
+h.Motion = 'horizontal';
+h.Enable = 'on';
+%%zoom in the horizontal direction
+
+subplot(3, 2, 1)
+plot(t, yt);
+axis([0 0.02 -1 1])
+subplot(3, 2, 3)
+plot(t, nt);
+axis([0 0.02 -5 5])
+subplot(3, 2, 5)
+plot(t, xt);
+axis([0 0.02 -5 5])
+
+R=xcorr(xt)/length(xt);
+d=length(t)*Ts;
+axisTau=[-d+Ts:Ts:d-Ts];
+subplot(3,2,2)
+plot(axisTau, R)
+
+R1=xcorr(xt, 'biased')/length(xt);
+d=length(t)*Ts;
+axisTau=[-d+Ts:Ts:d-Ts];
+subplot(3,2,4)
+plot(axisTau, R1)
+
+R2=xcorr(xt, 'unbiased')/length(xt);
+d=length(t)*Ts;
+axisTau=[-d+Ts:Ts:d-Ts];
+subplot(3,2,6)
+plot(axisTau, R2)
