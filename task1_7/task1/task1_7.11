@@ -1,0 +1,40 @@
+%% part 1
+A=1;
+fc=1e3;
+fs=50e3;
+Ts=1/fs;
+T=1/fc;
+t=0:Ts:50*T;
+phase=1/2/pi;
+wc=2*pi*fc;
+
+%% part 2
+yt=A*cos(wc*t+phase);
+subplot(3, 1, 1)
+%%first plot
+stem(t,yt)
+    h = zoom;
+    h.Motion = 'horizontal';
+    h.Enable = 'on';
+    %%zoom in the horizontal direction
+
+%% part 3
+R=xcorr(yt)/length(yt);
+
+d=length(t)*Ts;
+axisTau=[-d+Ts:Ts:d-Ts]; %%can also be done with lags, see help xcorr
+%%se pot face exact 4 panels si setate axele sa fie la fel ca acolo
+subplot(3, 1, 2)
+%%second plot; also third if you zoom
+plot(axisTau, R)
+
+%% part 4
+omegac=2*pi*fc;
+Rdev=A*A/2*cos(omegac.*axisTau)
+subplot(3, 1, 3)
+%%fourth plot in the solution
+plot(axisTau, Rdev)
+
+%% part 5
+average=mean(yt)
+variance=var(yt)
