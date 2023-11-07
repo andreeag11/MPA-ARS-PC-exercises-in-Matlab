@@ -1,0 +1,29 @@
+% part 1
+sigma=0.2;
+fc=1e3;
+fs=20e3;
+Ts=1/fs;
+T=1/fc;
+t=0:Ts:100*T;
+
+% part 2
+nt=sigma*randn(1, length(t));
+subplot(2, 1, 1)
+stem(t, nt)
+    h = zoom;
+    h.Motion = 'horizontal';
+    h.Enable = 'on';
+    %%zoom in the horizontal direction
+
+% part 3
+R=xcorr(nt)/length(nt);
+d=length(t)*Ts;
+axisTau=[-d+Ts:Ts:d-Ts];
+subplot(2, 1, 2)
+plot(axisTau, R, 'o')
+axis([-5e-4 5e-4 -0.02 0.05])
+
+
+% [r, lags]=xcorr(nt, nt);
+% stem(lags, r)
+% axis([-5e-4 5e-4 -0.02 0.05])
